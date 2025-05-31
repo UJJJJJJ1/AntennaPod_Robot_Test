@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.2.2 (Python 3.13.3 on win32)" generated="2025-05-31T16:43:46.359909" rpa="false" schemaversion="5">
+<suite id="s1" name="Hello Test" source="e:\Robot_Test\hello_test.robot">
+<kw name="Run Keywords" owner="BuiltIn" type="SETUP">
+<kw name="Open AntennaPod" owner="Setup">
+<kw name="Open Application" owner="AppiumLibrary">
+<arg>${REMOTE_URL}</arg>
+<arg>platformName=${PLATFORM_NAME}</arg>
+<arg>platformVersion=${PLATFORM_VERSION}</arg>
+<arg>deviceName=${DEVICE_NAME}</arg>
+<arg>automationName=UiAutomator2</arg>
+<arg>newCommandTimeout=50000</arg>
+<arg>appActivity=${Activity_NAME}</arg>
+<arg>appPackage=${PACKAGE_NAME}</arg>
+<arg>noReset=true</arg>
+<doc>Opens a new application to given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://appium.io/docs/en/2.1/cli/args/
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | no     | alias             |
+| strict_ssl          | No     | allows you to send commands to an invalid certificate host like a self-signed one. |</doc>
+<status status="PASS" start="2025-05-31T16:43:46.489011" elapsed="7.018764"/>
+</kw>
+<status status="PASS" start="2025-05-31T16:43:46.488837" elapsed="7.019195"/>
+</kw>
+<arg>Open AntennaPod</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<status status="PASS" start="2025-05-31T16:43:46.488557" elapsed="7.019592"/>
+</kw>
+<test id="s1-t1" name="T" line="22">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-05-31T16:43:53.508882" level="INFO">123</msg>
+<arg>123</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-05-31T16:43:53.508735" elapsed="0.001431"/>
+</kw>
+<tag>UC-MC</tag>
+<status status="PASS" start="2025-05-31T16:43:53.508255" elapsed="0.002242"/>
+</test>
+<status status="PASS" start="2025-05-31T16:43:46.362491" elapsed="7.148828"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">UC-MC</stat>
+</tag>
+<suite>
+<stat name="Hello Test" id="s1" pass="1" fail="0" skip="0">Hello Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

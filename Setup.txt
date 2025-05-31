@@ -1,0 +1,217 @@
+*** Settings ***
+Library    AppiumLibrary
+Library    BuiltIn
+Library    String
+Library    Collections
+
+*** Variables ***
+${REMOTE_URL}     http://127.0.0.1:4723/wd/hub
+${PLATFORM_NAME}    android
+${PLATFORM_VERSION}    16.0
+${DEVICE_NAME}    emulator-5554
+${PACKAGE_NAME}     de.danoeh.antennapod.debug
+${Activity_NAME}        de.danoeh.antennapod.activity.MainActivity
+
+*** Keywords ***
+Open AntennaPod
+    Open Application   ${REMOTE_URL}
+    ...    platformName=${PLATFORM_NAME}
+    ...    platformVersion=${PLATFORM_VERSION}
+    ...    deviceName=${DEVICE_NAME}
+    ...    automationName=UiAutomator2
+    ...    newCommandTimeout=50000
+    ...    appActivity=${Activity_NAME}
+    ...    appPackage=${PACKAGE_NAME}
+    ...    noReset=true
+
+Click Search Button On Home Page
+    ${search_btn} =    	Set Variable    //android.widget.Button[@content-desc="Search"]
+    Wait Until Element Is Visible    ${search_btn}    timeout=20s
+    Click Element    ${search_btn}   
+
+Click Search Online Button
+    ${search_online_btn} =    	Set Variable    //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/actionButton"]
+    Wait Until Element Is Visible    ${search_online_btn}    timeout=20s
+    Click Element    ${search_online_btn}
+
+Search Podcast
+    [Arguments]    ${podcast}
+    ${search_plate} =    Set Variable    //android.widget.AutoCompleteTextView[@resource-id="de.danoeh.antennapod.debug:id/search_src_text"]
+    Wait Until Element Is Visible    ${search_plate}    timeout=20s
+    Input Text    ${search_plate}    ${podcast}
+    Click Search Online Button
+
+Select Podcast In Search Page
+    [Arguments]    ${podcast}
+    ${podcast_locator} =    Set Variable    //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvTitle"and @text="${podcast}"]
+    Wait Until Element Is Visible    ${podcast_locator}    timeout=20s
+    Click Element    ${podcast_locator}
+
+Click Subscribe Button
+    ${subscribe_btn} =    	Set Variable    //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+    Wait Until Element Is Visible    ${subscribe_btn}    timeout=20s
+    Click Element    ${subscribe_btn}
+    Wait Until Page Does Not Contain    ${subscribe_btn}    timeout=20s
+
+Click Home Page Button
+    ${home_page_btn} =    	Set Variable    //android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]
+    Wait Until Element Is Visible    ${home_page_btn}    timeout=20s
+    Click Element    ${home_page_btn}
+
+Add Poscast
+    [Arguments]    ${podcast}
+    Click Search Button On Home Page
+    Search Podcast    ${podcast}
+    Select Podcast In Search Page    ${podcast}
+    Click Subscribe Button
+    Click Home Page Button
+
+Select Podcast On Home Page
+    [Arguments]    ${podcast_name}
+    ${podcast_locator} =    Set Variable    //android.widget.ImageView[@content-desc="${podcast_name}"]
+    Wait Until Element Is Visible    ${podcast_locator}    timeout=20s
+    Click Element    ${podcast_locator}
+
+Click First Episode In Podcast
+    Wait Until Element Is Visible    xpath=(//android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/container"])[1]    timeout=20s
+    Click Element    xpath=(//android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/container"])[1]
+
+Click Download Button
+    ${download_btn} =    Set Variable    //android.widget.TextView[@text="Download"]
+    Wait Until Element Is Visible    ${download_btn}    timeout=20s
+    Click Element    ${download_btn}
+    ${delete_btn} =    Set Variable    //android.widget.TextView[@text="Delete"]
+    Wait Until Element Is Visible    ${delete_btn}    timeout=30s
+
+Click Play Button
+    ${play_btn} =    Set Variable    //android.widget.TextView[@text="Play"]
+    Wait Until Element Is Visible    ${play_btn}    timeout=10s
+    Click Element    ${play_btn}
+    ${pause_btn} =    Set Variable    //android.widget.TextView[@text="Pause"]
+    Wait Until Element Is Visible    ${pause_btn}    timeout=10s
+
+Click Podcast Below
+    ${podcast} =    Set Variable    //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]
+    Wait Until Element Is Visible    ${podcast}    timeout=10s
+    Click Element    ${podcast}
+
+Verify Pause Button Is Visible In Podcast Player Page
+    Wait Until Keyword Succeeds    1min    3sec    Element Should Be Visible    xpath=//android.widget.ImageButton[@content-desc="Pause"]
+
+Click Back Button In Podcast Player Page
+    ${back_btn} =    Set Variable    //android.widget.ImageButton[@content-desc="Back"]
+    Wait Until Element Is Visible    ${back_btn}    timeout=10s
+    Click Element    ${back_btn}
+    ${more_option_btn} =    Set Variable    //android.widget.ImageView[@content-desc="More options"]
+    Wait Until Element Is Visible    ${more_option_btn}    timeout=10s
+
+Click Delete Button
+    ${delete_btn} =    Set Variable    //android.widget.TextView[@text="Delete"]
+    Wait Until Element Is Visible    ${delete_btn}    timeout=10s
+    Click Element    ${delete_btn}
+
+Click Stream Button
+    ${stream_button} =    Set Variable    //android.widget.TextView[@text="Stream"]
+    Wait Until Element Is Visible    ${stream_button}    timeout=10s
+    Click Element    ${stream_button}
+    ${pause_btn} =    Set Variable    //android.widget.TextView[@text="Pause"]
+    Wait Until Element Is Visible    ${pause_btn}    timeout=10s
+
+Click Pause Button
+    ${pause_btn} =    Set Variable    //android.widget.TextView[@text="Pause"]
+    Wait Until Element Is Visible    ${pause_btn}    timeout=10s
+    Click Element    ${pause_btn}
+
+Click Pause Button In Podcast Player Page
+    ${pause_btn} =    Set Variable    //android.widget.ImageButton[@content-desc="Pause"]
+    Wait Until Keyword Succeeds    1min    3sec    Wait Until Element Is Visible    ${pause_btn}    timeout=10s
+    Click Element    ${pause_btn}
+
+Verify Play Button Is Visible In Podcast Player Page
+    Wait Until Keyword Succeeds    1min    3sec    Element Should Be Visible    xpath=//android.widget.ImageButton[@content-desc="Play"]
+
+Click Play Button In Podcast Player Page
+    ${play_btn} =    Set Variable    //android.widget.ImageButton[@content-desc="Play"]
+    Wait Until Element Is Visible    ${play_btn}    timeout=10s
+    Click Element    ${play_btn}
+
+Swipe Down To Close Podcast
+    ${podcast} =    Set Variable    //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]
+    Wait Until Element Is Visible    ${podcast}    timeout=10s
+    ${bar} =    Set Variable    //android.view.View[@resource-id="de.danoeh.antennapod.debug:id/bottom_padding"]
+    Wait Until Element Is Visible    ${bar}    timeout=10s
+    Drag And Drop    ${podcast}    ${bar}
+    Wait Until Page Does Not Contain Element    ${podcast}
+
+Click Fast Forward 30s Button
+    ${fast_btn} =    Set Variable    //android.widget.ImageButton[@content-desc="Fast-forward"]
+    Wait Until Element Is Visible    ${fast_btn}    timeout=10s
+    Click Element    ${fast_btn}
+
+Convert Time String To Seconds
+    [Arguments]    ${time_string}
+    ${parts}=    Split String    ${time_string}    :
+    ${hours}=    Convert To Integer    ${parts[0]}
+    ${minutes}=  Convert To Integer    ${parts[1]}
+    ${seconds}=  Convert To Integer    ${parts[2]}
+    ${total}=    Evaluate    ${hours}*3600 + ${minutes}*60 + ${seconds}
+    RETURN    ${total}
+
+Verify Fast Forward Podcast Is Correct
+    Sleep    3s
+    ${time_locator} =    Set Variable    //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]
+    Wait Until Element Is Visible    ${time_locator}
+    ${time1}=    Get Text    ${time_locator}
+    Log    Current play time: ${time1}
+    Click Fast Forward 30s Button
+    Sleep    10s
+    Wait Until Element Is Visible    ${time_locator}
+    Sleep    3s
+    ${time2}=    Get Text    ${time_locator}
+    Log    Current play time: ${time2}
+
+    ${t1}=    Convert Time String To Seconds    ${time1}
+    ${t2}=    Convert Time String To Seconds    ${time2}
+    ${expected}=    Evaluate    ${t1} + 30
+    Should Be Equal As Integers    ${t2}    ${expected}
+
+Click Rewind 10s Button
+    ${back_btn} =    Set Variable    //android.widget.ImageButton[@content-desc="Rewind"]
+    Wait Until Element Is Visible    ${back_btn}    timeout=10s
+    Click Element    ${back_btn}
+
+Verify Rewind Podcast Is Correct
+    Sleep    3s
+    Click Fast Forward 30s Button
+    ${time_locator} =    Set Variable    //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]
+    Wait Until Element Is Visible    ${time_locator}
+    ${time1}=    Get Text    ${time_locator}
+    Log    Current play time: ${time1}
+    Click Rewind 10s Button
+    Sleep    3s
+    Wait Until Element Is Visible    ${time_locator}
+    Sleep    3s
+    ${time2}=    Get Text    ${time_locator}
+    Log    Current play time: ${time2}
+
+    ${t1}=    Convert Time String To Seconds    ${time1}
+    ${t2}=    Convert Time String To Seconds    ${time2}
+    ${expected}=    Evaluate    ${t1} - 10
+    Should Be Equal As Integers    ${t2}    ${expected}
+
+Verify Fast Forward Podcast To Specific Time Is Correct
+    ${bar_locator} =    Set Variable    //android.widget.SeekBar[@resource-id="de.danoeh.antennapod.debug:id/sbPosition"]
+    Wait Until Element Is Visible    ${bar_locator}    
+    Input Text    ${bar_locator}    120.0
+    ${text}=    Get Text    ${bar_locator}
+    ${value}=    Convert To Number    ${text}
+    Log    ${text}
+    WHILE    ${TRUE}
+        ${condition} =    Evaluate    ${value} == 120.0
+        Exit For Loop If    ${condition}
+        Input Text    ${bar_locator}    120.0
+        ${text}=    Get Text    ${bar_locator}
+        ${value}=    Convert To Number    ${text}
+        Log    ${text}
+    END
+    Should Be Equal    ${text}    120.0
