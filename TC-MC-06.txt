@@ -1,0 +1,22 @@
+*** Settings ***
+Library    AppiumLibrary
+Library    BuiltIn
+Library    String
+Library    Collections
+
+*** Keywords ***
+Verify Fast Forward Podcast To Specific Time Is Correct
+    ${bar_locator} =    Set Variable    //android.widget.SeekBar[@resource-id="de.danoeh.antennapod.debug:id/sbPosition"]
+    Wait Until Element Is Visible    ${bar_locator}    
+    Input Text    ${bar_locator}    120.0
+    ${text}=    Get Text    ${bar_locator}
+    ${value}=    Convert To Number    ${text}
+    WHILE    ${TRUE}
+        ${condition} =    Evaluate    ${value} == 120.0
+        Exit For Loop If    ${condition}
+        Input Text    ${bar_locator}    120.0
+        ${text}=    Get Text    ${bar_locator}
+        ${value}=    Convert To Number    ${text}
+        Log    ${text}
+    END
+    Should Be Equal    ${text}    120.0

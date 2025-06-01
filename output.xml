@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.13.3 on win32)" generated="2025-05-31T16:43:46.359909" rpa="false" schemaversion="5">
-<suite id="s1" name="Hello Test" source="e:\Robot_Test\hello_test.robot">
+<robot generator="Robot 7.2.2 (Python 3.13.3 on win32)" generated="2025-06-01T22:54:42.902109" rpa="false" schemaversion="5">
+<suite id="s1" name="UC QC Test" source="e:\AntennaPod_Robot_Test\UC_QC_Test.robot">
 <kw name="Run Keywords" owner="BuiltIn" type="SETUP">
-<kw name="Open AntennaPod" owner="Setup">
+<kw name="Open AntennaPod" owner="common">
 <kw name="Open Application" owner="AppiumLibrary">
 <arg>${REMOTE_URL}</arg>
 <arg>platformName=${PLATFORM_NAME}</arg>
@@ -20,35 +20,746 @@ Please check https://appium.io/docs/en/2.1/cli/args/
 | remote_url          | Yes    | Appium server url |
 | alias               | no     | alias             |
 | strict_ssl          | No     | allows you to send commands to an invalid certificate host like a self-signed one. |</doc>
-<status status="PASS" start="2025-05-31T16:43:46.489011" elapsed="7.018764"/>
+<status status="PASS" start="2025-06-01T22:54:43.039683" elapsed="6.876858"/>
 </kw>
-<status status="PASS" start="2025-05-31T16:43:46.488837" elapsed="7.019195"/>
+<status status="PASS" start="2025-06-01T22:54:43.039491" elapsed="6.877273"/>
+</kw>
+<kw name="Add Poscast" owner="common">
+<kw name="Click Search Button On Home Page" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:54:49.917401" level="INFO">${search_btn} = //android.widget.Button[@content-desc="Search"]</msg>
+<var>${search_btn}</var>
+<arg>//android.widget.Button[@content-desc="Search"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:54:49.917284" elapsed="0.001779"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:54:50.922071" level="INFO">xpath criteria: //android.widget.Button[@content-desc="Search"]</msg>
+<arg>${search_btn}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:54:49.919269" elapsed="1.003013"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:54:50.923168" level="INFO">Clicking element '//android.widget.Button[@content-desc="Search"]'.</msg>
+<msg time="2025-06-01T22:54:51.047622" level="INFO">xpath criteria: //android.widget.Button[@content-desc="Search"]</msg>
+<arg>${search_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:54:50.922460" elapsed="0.125382"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:54:49.917154" elapsed="1.130808"/>
+</kw>
+<kw name="Search Podcast" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:54:51.048767" level="INFO">${search_plate} = //android.widget.AutoCompleteTextView[@resource-id="de.danoeh.antennapod.debug:id/search_src_text"]</msg>
+<var>${search_plate}</var>
+<arg>//android.widget.AutoCompleteTextView[@resource-id="de.danoeh.antennapod.debug:id/search_src_text"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:54:51.048568" elapsed="0.000288"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:54:52.369362" level="INFO">xpath criteria: //android.widget.AutoCompleteTextView[@resource-id="de.danoeh.antennapod.debug:id/search_src_text"]</msg>
+<arg>${search_plate}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:54:51.049011" elapsed="1.320503"/>
+</kw>
+<kw name="Input Text" owner="AppiumLibrary">
+<msg time="2025-06-01T22:54:52.370199" level="INFO">Typing text 'CNN 5 Things' into text field '//android.widget.AutoCompleteTextView[@resource-id="de.danoeh.antennapod.debug:id/search_src_text"]'</msg>
+<msg time="2025-06-01T22:54:52.444584" level="INFO">xpath criteria: //android.widget.AutoCompleteTextView[@resource-id="de.danoeh.antennapod.debug:id/search_src_text"]</msg>
+<arg>${search_plate}</arg>
+<arg>${podcast}</arg>
+<doc>Types the given `text` into text field identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:54:52.369644" elapsed="0.075123"/>
+</kw>
+<kw name="Click Search Online Button" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:54:52.445342" level="INFO">${search_online_btn} = //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/actionButton"]</msg>
+<var>${search_online_btn}</var>
+<arg>//android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/actionButton"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:54:52.445185" elapsed="0.000226"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:54:53.853662" level="INFO">xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/actionButton"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/actionButton"]</msg>
+<arg>${search_online_btn}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:54:52.445511" elapsed="1.408332"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:54:53.854618" level="INFO">Clicking element '//android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/actionButton"]'.</msg>
+<msg time="2025-06-01T22:54:53.953689" level="INFO">xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/actionButton"]</msg>
+<arg>${search_online_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:54:53.853998" elapsed="0.099845"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:54:52.444943" elapsed="1.508982"/>
+</kw>
+<arg>${podcast}</arg>
+<status status="PASS" start="2025-06-01T22:54:51.048229" elapsed="2.905746"/>
+</kw>
+<kw name="Select Podcast In Search Page" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:54:53.954411" level="INFO">${podcast_locator} = //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvTitle"and @text="CNN 5 Things"]</msg>
+<var>${podcast_locator}</var>
+<arg>//android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvTitle"and @text="${podcast}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:54:53.954292" elapsed="0.000168"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:54:56.314027" level="INFO">xpath criteria: //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvTitle"and @text="CNN 5 Things"]
+xpath criteria: //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvTitle"and @text="CNN 5 Things"]</msg>
+<arg>${podcast_locator}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:54:53.954533" elapsed="2.359665"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:54:56.314869" level="INFO">Clicking element '//android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvTitle"and @text="CNN 5 Things"]'.</msg>
+<msg time="2025-06-01T22:54:57.897183" level="INFO">xpath criteria: //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvTitle"and @text="CNN 5 Things"]</msg>
+<arg>${podcast_locator}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:54:56.314338" elapsed="1.583062"/>
+</kw>
+<arg>${podcast}</arg>
+<status status="PASS" start="2025-06-01T22:54:53.954096" elapsed="3.943440"/>
+</kw>
+<kw name="Click Subscribe Button" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:54:57.898404" level="INFO">${subscribe_btn} = //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]</msg>
+<var>${subscribe_btn}</var>
+<arg>//android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:54:57.898190" elapsed="0.000320"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:01.952499" level="INFO">xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]</msg>
+<arg>${subscribe_btn}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:54:57.898638" elapsed="4.054086"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:01.953489" level="INFO">Clicking element '//android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]'.</msg>
+<msg time="2025-06-01T22:55:04.615770" level="INFO">xpath criteria: //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]</msg>
+<arg>${subscribe_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:55:01.952876" elapsed="2.663090"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain" owner="AppiumLibrary">
+<arg>${subscribe_btn}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until `text` disappears from current page.</doc>
+<status status="PASS" start="2025-06-01T22:55:04.616132" elapsed="0.214929"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:54:57.897761" elapsed="6.933461"/>
+</kw>
+<kw name="Click Home Page Button" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:04.831741" level="INFO">${home_page_btn} = //android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]</msg>
+<var>${home_page_btn}</var>
+<arg>//android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:04.831583" elapsed="0.000263"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:05.249977" level="INFO">xpath criteria: //android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]</msg>
+<arg>${home_page_btn}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:04.831964" elapsed="0.418178"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:05.250789" level="INFO">Clicking element '//android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]'.</msg>
+<msg time="2025-06-01T22:55:06.474654" level="INFO">xpath criteria: //android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]</msg>
+<arg>${home_page_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:55:05.250275" elapsed="1.224543"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:55:04.831381" elapsed="1.643531"/>
+</kw>
+<arg>CNN 5 Things</arg>
+<status status="PASS" start="2025-06-01T22:54:49.916953" elapsed="16.558015"/>
 </kw>
 <arg>Open AntennaPod</arg>
+<arg>AND</arg>
+<arg>Add Poscast</arg>
+<arg>CNN 5 Things</arg>
 <doc>Executes all the given keywords in a sequence.</doc>
-<status status="PASS" start="2025-05-31T16:43:46.488557" elapsed="7.019592"/>
+<status status="PASS" start="2025-06-01T22:54:43.039152" elapsed="23.435874"/>
 </kw>
-<test id="s1-t1" name="T" line="22">
+<test id="s1-t1" name="Fast_Forward_Podcast" line="77">
+<kw name="Run Keywords" owner="BuiltIn" type="SETUP">
+<kw name="Select Podcast On Home Page" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:06.476059" level="INFO">${podcast_locator} = //android.widget.ImageView[@content-desc="CNN 5 Things"]</msg>
+<var>${podcast_locator}</var>
+<arg>//android.widget.ImageView[@content-desc="${podcast_name}"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:06.475931" elapsed="0.000251"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:08.247848" level="INFO">xpath criteria: //android.widget.ImageView[@content-desc="CNN 5 Things"]</msg>
+<arg>${podcast_locator}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:06.476264" elapsed="1.771761"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:08.248945" level="INFO">Clicking element '//android.widget.ImageView[@content-desc="CNN 5 Things"]'.</msg>
+<msg time="2025-06-01T22:55:08.343161" level="INFO">xpath criteria: //android.widget.ImageView[@content-desc="CNN 5 Things"]</msg>
+<arg>${podcast_locator}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:55:08.248204" elapsed="0.095163"/>
+</kw>
+<arg>CNN 5 Things</arg>
+<status status="PASS" start="2025-06-01T22:55:06.475773" elapsed="1.867692"/>
+</kw>
+<kw name="Click First Episode In Podcast" owner="common">
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:10.674723" level="INFO">xpath criteria: (//android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/container"])[1]</msg>
+<arg>xpath=(//android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/container"])[1]</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:08.343842" elapsed="2.331055"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:10.675886" level="INFO">Clicking element 'xpath=(//android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/container"])[1]'.</msg>
+<msg time="2025-06-01T22:55:10.813812" level="INFO">xpath criteria: (//android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/container"])[1]</msg>
+<arg>xpath=(//android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/container"])[1]</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:55:10.675050" elapsed="0.138925"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:55:08.343629" elapsed="2.470440"/>
+</kw>
+<kw name="Click Stream Button" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:10.814593" level="INFO">${stream_button} = //android.widget.TextView[@text="Stream"]</msg>
+<var>${stream_button}</var>
+<arg>//android.widget.TextView[@text="Stream"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:10.814465" elapsed="0.000288"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:12.327915" level="INFO">xpath criteria: //android.widget.TextView[@text="Stream"]
+xpath criteria: //android.widget.TextView[@text="Stream"]</msg>
+<arg>${stream_button}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:10.814880" elapsed="1.513227"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:12.328972" level="INFO">Clicking element '//android.widget.TextView[@text="Stream"]'.</msg>
+<msg time="2025-06-01T22:55:12.895303" level="INFO">xpath criteria: //android.widget.TextView[@text="Stream"]</msg>
+<arg>${stream_button}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:55:12.328269" elapsed="0.567260"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:12.895860" level="INFO">${pause_btn} = //android.widget.TextView[@text="Pause"]</msg>
+<var>${pause_btn}</var>
+<arg>//android.widget.TextView[@text="Pause"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:12.895693" elapsed="0.000224"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:16.207484" level="INFO">xpath criteria: //android.widget.TextView[@text="Pause"]
+xpath criteria: //android.widget.TextView[@text="Pause"]</msg>
+<arg>${pause_btn}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:12.895995" elapsed="3.311659"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:55:10.814235" elapsed="5.393511"/>
+</kw>
+<kw name="Click Podcast Below" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:16.208235" level="INFO">${podcast} = //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]</msg>
+<var>${podcast}</var>
+<arg>//android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:16.208104" elapsed="0.000193"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:16.422448" level="INFO">xpath criteria: //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]</msg>
+<arg>${podcast}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:16.208383" elapsed="0.214244"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:16.423519" level="INFO">Clicking element '//android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]'.</msg>
+<msg time="2025-06-01T22:55:16.675916" level="INFO">xpath criteria: //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]</msg>
+<arg>${podcast}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:55:16.422788" elapsed="0.253289"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:55:16.207903" elapsed="0.468260"/>
+</kw>
+<kw name="Click Pause Button In Podcast Player Page" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:16.676629" level="INFO">${pause_btn} = //android.widget.ImageButton[@content-desc="Pause"]</msg>
+<var>${pause_btn}</var>
+<arg>//android.widget.ImageButton[@content-desc="Pause"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:16.676510" elapsed="0.000174"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:18.077036" level="INFO">xpath criteria: //android.widget.ImageButton[@content-desc="Pause"]</msg>
+<arg>${pause_btn}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:16.676952" elapsed="1.400251"/>
+</kw>
+<arg>1min</arg>
+<arg>3sec</arg>
+<arg>Wait Until Element Is Visible</arg>
+<arg>${pause_btn}</arg>
+<arg>timeout=10s</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2025-06-01T22:55:16.676772" elapsed="1.400522"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:18.078065" level="INFO">Clicking element '//android.widget.ImageButton[@content-desc="Pause"]'.</msg>
+<msg time="2025-06-01T22:55:19.438853" level="INFO">xpath criteria: //android.widget.ImageButton[@content-desc="Pause"]</msg>
+<arg>${pause_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:55:18.077422" elapsed="1.361597"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:55:16.676302" elapsed="2.762816"/>
+</kw>
+<arg>Select Podcast On Home Page</arg>
+<arg>CNN 5 Things</arg>
+<arg>AND</arg>
+<arg>Click First Episode In Podcast</arg>
+<arg>AND</arg>
+<arg>Click Stream Button</arg>
+<arg>AND</arg>
+<arg>Click Podcast Below</arg>
+<arg>AND</arg>
+<arg>Click Pause Button In Podcast Player Page</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<status status="PASS" start="2025-06-01T22:55:06.475570" elapsed="12.963607"/>
+</kw>
+<kw name="Verify Fast Forward Podcast Is Correct" owner="TC-MC-05">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:19.440141" level="INFO">${time_locator} = //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]</msg>
+<var>${time_locator}</var>
+<arg>//android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:19.439944" elapsed="0.000663"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:19.555393" level="INFO">xpath criteria: //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]</msg>
+<arg>${time_locator}</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:19.440742" elapsed="0.114818"/>
+</kw>
+<kw name="Click Rewind 10s Button" owner="TC-MC-05">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:19.556143" level="INFO">${back_btn} = //android.widget.ImageButton[@content-desc="Rewind"]</msg>
+<var>${back_btn}</var>
+<arg>//android.widget.ImageButton[@content-desc="Rewind"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:19.555991" elapsed="0.000220"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:19.659826" level="INFO">xpath criteria: //android.widget.ImageButton[@content-desc="Rewind"]</msg>
+<arg>${back_btn}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:19.556303" elapsed="0.103677"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:19.660734" level="INFO">Clicking element '//android.widget.ImageButton[@content-desc="Rewind"]'.</msg>
+<msg time="2025-06-01T22:55:19.781615" level="INFO">xpath criteria: //android.widget.ImageButton[@content-desc="Rewind"]</msg>
+<arg>${back_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:55:19.660140" elapsed="0.121629"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:55:19.555732" elapsed="0.226203"/>
+</kw>
+<kw name="Get Text" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:20.475220" level="INFO">Element '//android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]' text is '00:00:00' </msg>
+<msg time="2025-06-01T22:55:20.475379" level="INFO">xpath criteria: //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]</msg>
+<msg time="2025-06-01T22:55:20.475460" level="INFO">${time1} = 00:00:00</msg>
+<var>${time1}</var>
+<arg>${time_locator}</arg>
+<doc>Get element text (for hybrid and mobile browser use `xpath` locator, others might cause problem)</doc>
+<status status="PASS" start="2025-06-01T22:55:19.782059" elapsed="0.693446"/>
+</kw>
+<kw name="Convert Time String To Seconds" owner="TC-MC-05">
+<kw name="Split String" owner="String">
+<msg time="2025-06-01T22:55:20.476069" level="INFO">${parts} = ['00', '00', '00']</msg>
+<var>${parts}</var>
+<arg>${time_string}</arg>
+<arg>:</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="PASS" start="2025-06-01T22:55:20.475926" elapsed="0.000204"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2025-06-01T22:55:20.476533" level="INFO">${hours} = 0</msg>
+<var>${hours}</var>
+<arg>${parts[0]}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2025-06-01T22:55:20.476212" elapsed="0.000374"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2025-06-01T22:55:20.476934" level="INFO">${minutes} = 0</msg>
+<var>${minutes}</var>
+<arg>${parts[1]}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2025-06-01T22:55:20.476672" elapsed="0.000309"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2025-06-01T22:55:20.477295" level="INFO">${seconds} = 0</msg>
+<var>${seconds}</var>
+<arg>${parts[2]}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2025-06-01T22:55:20.477052" elapsed="0.000289"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-06-01T22:55:20.477545" level="INFO">${total} = 0</msg>
+<var>${total}</var>
+<arg>${hours}*3600 + ${minutes}*60 + ${seconds}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-06-01T22:55:20.477411" elapsed="0.000178"/>
+</kw>
+<return>
+<value>${total}</value>
+<status status="PASS" start="2025-06-01T22:55:20.477656" elapsed="0.000063"/>
+</return>
+<msg time="2025-06-01T22:55:20.477810" level="INFO">${total} = 0</msg>
+<var>${total}</var>
+<arg>${time1}</arg>
+<status status="PASS" start="2025-06-01T22:55:20.475697" elapsed="0.002151"/>
+</kw>
 <kw name="Log" owner="BuiltIn">
-<msg time="2025-05-31T16:43:53.508882" level="INFO">123</msg>
-<arg>123</arg>
+<msg time="2025-06-01T22:55:20.478002" level="INFO">Current play time: 00:00:00</msg>
+<arg>Current play time: ${time1}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="PASS" start="2025-05-31T16:43:53.508735" elapsed="0.001431"/>
+<status status="PASS" start="2025-06-01T22:55:20.477920" elapsed="0.000131"/>
 </kw>
+<kw name="Click Fast Forward 30s Button" owner="TC-MC-05">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:20.478341" level="INFO">${fast_btn} = //android.widget.ImageButton[@content-desc="Fast-forward"]</msg>
+<var>${fast_btn}</var>
+<arg>//android.widget.ImageButton[@content-desc="Fast-forward"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:20.478260" elapsed="0.000124"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:20.659332" level="INFO">xpath criteria: //android.widget.ImageButton[@content-desc="Fast-forward"]</msg>
+<arg>${fast_btn}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:20.478449" elapsed="0.181088"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:20.660368" level="INFO">Clicking element '//android.widget.ImageButton[@content-desc="Fast-forward"]'.</msg>
+<msg time="2025-06-01T22:55:20.796386" level="INFO">xpath criteria: //android.widget.ImageButton[@content-desc="Fast-forward"]</msg>
+<arg>${fast_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:55:20.659674" elapsed="0.136873"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:55:20.478134" elapsed="0.318497"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:21.508507" level="INFO">xpath criteria: //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]</msg>
+<arg>${time_locator}</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:20.796740" elapsed="0.711932"/>
+</kw>
+<kw name="Get Text" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:21.756828" level="INFO">Element '//android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]' text is '00:00:32' </msg>
+<msg time="2025-06-01T22:55:21.756991" level="INFO">xpath criteria: //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]</msg>
+<msg time="2025-06-01T22:55:21.757091" level="INFO">${time2} = 00:00:32</msg>
+<var>${time2}</var>
+<arg>${time_locator}</arg>
+<doc>Get element text (for hybrid and mobile browser use `xpath` locator, others might cause problem)</doc>
+<status status="PASS" start="2025-06-01T22:55:21.508807" elapsed="0.248337"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.757422" level="INFO">Current play time: 00:00:32</msg>
+<arg>Current play time: ${time2}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.757284" elapsed="0.000204"/>
+</kw>
+<kw name="Convert Time String To Seconds" owner="TC-MC-05">
+<kw name="Split String" owner="String">
+<msg time="2025-06-01T22:55:21.757964" level="INFO">${parts} = ['00', '00', '00']</msg>
+<var>${parts}</var>
+<arg>${time_string}</arg>
+<arg>:</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.757844" elapsed="0.000174"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.758505" level="INFO">${hours} = 0</msg>
+<var>${hours}</var>
+<arg>${parts[0]}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.758108" elapsed="0.000461"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.759035" level="INFO">${minutes} = 0</msg>
+<var>${minutes}</var>
+<arg>${parts[1]}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.758683" elapsed="0.000410"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.759453" level="INFO">${seconds} = 0</msg>
+<var>${seconds}</var>
+<arg>${parts[2]}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.759174" elapsed="0.000334"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.759822" level="INFO">${total} = 0</msg>
+<var>${total}</var>
+<arg>${hours}*3600 + ${minutes}*60 + ${seconds}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.759584" elapsed="0.000291"/>
+</kw>
+<return>
+<value>${total}</value>
+<status status="PASS" start="2025-06-01T22:55:21.759927" elapsed="0.000059"/>
+</return>
+<msg time="2025-06-01T22:55:21.760073" level="INFO">${t1} = 0</msg>
+<var>${t1}</var>
+<arg>${time1}</arg>
+<status status="PASS" start="2025-06-01T22:55:21.757638" elapsed="0.002479"/>
+</kw>
+<kw name="Convert Time String To Seconds" owner="TC-MC-05">
+<kw name="Split String" owner="String">
+<msg time="2025-06-01T22:55:21.760662" level="INFO">${parts} = ['00', '00', '32']</msg>
+<var>${parts}</var>
+<arg>${time_string}</arg>
+<arg>:</arg>
+<doc>Splits the ``string`` using ``separator`` as a delimiter string.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.760432" elapsed="0.000282"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.761485" level="INFO">${hours} = 0</msg>
+<var>${hours}</var>
+<arg>${parts[0]}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.760807" elapsed="0.000732"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.762005" level="INFO">${minutes} = 0</msg>
+<var>${minutes}</var>
+<arg>${parts[1]}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.761646" elapsed="0.000421"/>
+</kw>
+<kw name="Convert To Integer" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.762415" level="INFO">${seconds} = 32</msg>
+<var>${seconds}</var>
+<arg>${parts[2]}</arg>
+<doc>Converts the given item to an integer number.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.762151" elapsed="0.000315"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.762719" level="INFO">${total} = 32</msg>
+<var>${total}</var>
+<arg>${hours}*3600 + ${minutes}*60 + ${seconds}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.762544" elapsed="0.000234"/>
+</kw>
+<return>
+<value>${total}</value>
+<status status="PASS" start="2025-06-01T22:55:21.762828" elapsed="0.000044"/>
+</return>
+<msg time="2025-06-01T22:55:21.762951" level="INFO">${t2} = 32</msg>
+<var>${t2}</var>
+<arg>${time2}</arg>
+<status status="PASS" start="2025-06-01T22:55:21.760245" elapsed="0.002748"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.763186" level="INFO">${expected} = 30</msg>
+<var>${expected}</var>
+<arg>${t1} + 30</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.763064" elapsed="0.000166"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.763459" level="INFO">${diff} = 2</msg>
+<var>${diff}</var>
+<arg>abs(${t2} - ${expected})</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.763301" elapsed="0.000214"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${diff} &lt;= 5</arg>
+<arg>Fast forward time is not within acceptable range.</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.763590" elapsed="0.000153"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:55:19.439626" elapsed="2.324180"/>
+</kw>
+<kw name="Run Keywords" owner="BuiltIn" type="TEARDOWN">
+<kw name="Click Back Button In Podcast Player Page" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:21.764542" level="INFO">${back_btn} = //android.widget.ImageButton[@content-desc="Back"]</msg>
+<var>${back_btn}</var>
+<arg>//android.widget.ImageButton[@content-desc="Back"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.764457" elapsed="0.000137"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:21.927944" level="INFO">xpath criteria: //android.widget.ImageButton[@content-desc="Back"]</msg>
+<arg>${back_btn}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.764671" elapsed="0.163477"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:21.929022" level="INFO">Clicking element '//android.widget.ImageButton[@content-desc="Back"]'.</msg>
+<msg time="2025-06-01T22:55:22.092888" level="INFO">xpath criteria: //android.widget.ImageButton[@content-desc="Back"]</msg>
+<arg>${back_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.928314" elapsed="0.164723"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:22.093357" level="INFO">${more_option_btn} = //android.widget.ImageView[@content-desc="More options"]</msg>
+<var>${more_option_btn}</var>
+<arg>//android.widget.ImageView[@content-desc="More options"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:22.093192" elapsed="0.000254"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:23.285170" level="INFO">xpath criteria: //android.widget.ImageView[@content-desc="More options"]</msg>
+<arg>${more_option_btn}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:22.093550" elapsed="1.191830"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:55:21.764320" elapsed="1.521164"/>
+</kw>
+<kw name="Click Home Page Button" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:23.286084" level="INFO">${home_page_btn} = //android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]</msg>
+<var>${home_page_btn}</var>
+<arg>//android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:23.285962" elapsed="0.000181"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:23.359130" level="INFO">xpath criteria: //android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]</msg>
+<arg>${home_page_btn}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:23.286221" elapsed="0.073072"/>
+</kw>
+<kw name="Click Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:23.360159" level="INFO">Clicking element '//android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]'.</msg>
+<msg time="2025-06-01T22:55:23.494968" level="INFO">xpath criteria: //android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]</msg>
+<arg>${home_page_btn}</arg>
+<doc>Click element identified by `locator`.</doc>
+<status status="PASS" start="2025-06-01T22:55:23.359459" elapsed="0.135658"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:55:23.285678" elapsed="0.209531"/>
+</kw>
+<kw name="Swipe Down To Close Podcast" owner="common">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:23.495692" level="INFO">${podcast} = //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]</msg>
+<var>${podcast}</var>
+<arg>//android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:23.495567" elapsed="0.000184"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:24.340558" level="INFO">xpath criteria: //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]</msg>
+<arg>${podcast}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:23.495834" elapsed="0.844922"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-06-01T22:55:24.341091" level="INFO">${bar} = //android.view.View[@resource-id="de.danoeh.antennapod.debug:id/bottom_padding"]</msg>
+<var>${bar}</var>
+<arg>//android.view.View[@resource-id="de.danoeh.antennapod.debug:id/bottom_padding"]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-06-01T22:55:24.340915" elapsed="0.000236"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:24.447076" level="INFO">xpath criteria: //android.view.View[@resource-id="de.danoeh.antennapod.debug:id/bottom_padding"]</msg>
+<arg>${bar}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until element specified with `locator` is visible.</doc>
+<status status="PASS" start="2025-06-01T22:55:24.341330" elapsed="0.105914"/>
+</kw>
+<kw name="Drag And Drop" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:26.543806" level="INFO">xpath criteria: //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]
+xpath criteria: //android.view.View[@resource-id="de.danoeh.antennapod.debug:id/bottom_padding"]</msg>
+<arg>${podcast}</arg>
+<arg>${bar}</arg>
+<doc>Drags the element identified by ``locator`` into the ``target`` element.</doc>
+<status status="PASS" start="2025-06-01T22:55:24.447385" elapsed="2.096639"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" owner="AppiumLibrary">
+<msg time="2025-06-01T22:55:27.300349" level="INFO">xpath criteria: //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]</msg>
+<arg>${podcast}</arg>
+<doc>Waits until element specified with `locator` disappears from current page.</doc>
+<status status="PASS" start="2025-06-01T22:55:26.544185" elapsed="0.756328"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:55:23.495365" elapsed="3.805241"/>
+</kw>
+<arg>Click Back Button In Podcast Player Page</arg>
+<arg>AND</arg>
+<arg>Click Home Page Button</arg>
+<arg>AND</arg>
+<arg>Swipe Down To Close Podcast</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<status status="PASS" start="2025-06-01T22:55:21.764156" elapsed="5.536512"/>
+</kw>
+<tag>TC-MC-05-01</tag>
 <tag>UC-MC</tag>
-<status status="PASS" start="2025-05-31T16:43:53.508255" elapsed="0.002242"/>
+<status status="PASS" start="2025-06-01T22:55:06.475124" elapsed="20.825780"/>
 </test>
-<status status="PASS" start="2025-05-31T16:43:46.362491" elapsed="7.148828"/>
+<kw name="Run Process" owner="Process" type="TEARDOWN">
+<msg time="2025-06-01T22:55:27.302198" level="INFO">Starting process:
+adb shell pm clear de.danoeh.antennapod.debug</msg>
+<msg time="2025-06-01T22:55:27.304949" level="INFO">Waiting for process to complete.</msg>
+<msg time="2025-06-01T22:55:27.496953" level="INFO">Process completed.</msg>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>pm</arg>
+<arg>clear</arg>
+<arg>${PACKAGE_NAME}</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2025-06-01T22:55:27.301862" elapsed="0.195286"/>
+</kw>
+<status status="PASS" start="2025-06-01T22:54:42.904500" elapsed="44.592725"/>
 </suite>
 <statistics>
 <total>
 <stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
+<stat pass="1" fail="0" skip="0">TC-MC-05-01</stat>
 <stat pass="1" fail="0" skip="0">UC-MC</stat>
 </tag>
 <suite>
-<stat name="Hello Test" id="s1" pass="1" fail="0" skip="0">Hello Test</stat>
+<stat name="UC QC Test" id="s1" pass="1" fail="0" skip="0">UC QC Test</stat>
 </suite>
 </statistics>
 <errors>

@@ -1,0 +1,7 @@
+*** Variables ***
+${REMOTE_URL}     http://127.0.0.1:4723/wd/hub
+${PLATFORM_NAME}    android
+${PLATFORM_VERSION}    16.0
+${DEVICE_NAME}    emulator-5554
+${PACKAGE_NAME}     de.danoeh.antennapod.debug
+${Activity_NAME}        de.danoeh.antennapod.activity.MainActivity

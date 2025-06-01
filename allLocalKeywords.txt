@@ -1,0 +1,5 @@
+*** Settings ***
+Resource   common.txt
+Resource   TC-MC-02.txt
+Resource   TC-MC-05.txt
+Resource   TC-MC-06.txt

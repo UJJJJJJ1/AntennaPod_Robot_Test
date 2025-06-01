@@ -1,0 +1,6 @@
+*** Settings ***
+Library    AppiumLibrary
+
+*** Keywords ***
+Verify Play Button Is Visible In Podcast Player Page
+    Wait Until Keyword Succeeds    1min    3sec    Element Should Be Visible    xpath=//android.widget.ImageButton[@content-desc="Play"]

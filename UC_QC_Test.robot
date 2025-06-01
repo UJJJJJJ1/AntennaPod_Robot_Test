@@ -2,25 +2,18 @@
 Force Tags    UC-MC
 Library    AppiumLibrary
 Library    Process
-Resource   ./Setup.txt
+Resource   ./allLocalKeywords.txt
+Resource    Variables.txt
 
 Suite Setup    Run Keywords    Open AntennaPod
 ...                     AND    Add Poscast    CNN 5 Things
 
 Suite Teardown    Run Process    adb    shell    pm    clear    ${PACKAGE_NAME}
 
-*** Variables ***
-${REMOTE_URL}     http://127.0.0.1:4723/wd/hub
-${PLATFORM_NAME}    android
-${PLATFORM_VERSION}    16.0
-${DEVICE_NAME}    emulator-5554
-${PACKAGE_NAME}     de.danoeh.antennapod.debug
-${Activity_NAME}        de.danoeh.antennapod.activity.MainActivity
-
 *** Test Cases ***
 # T
-    # Log    123
-    # Run Process    adb    shell    pm    clear    de.danoeh.antennapod.debug
+#     Log    123
+#     Run Process    adb    shell    pm    clear    de.danoeh.antennapod.debug
 
 Play_Podcast_By_Download
     [Tags]    TC-MC-01-01
@@ -103,6 +96,7 @@ Rewind_Podcast
     Verify Rewind Podcast Is Correct
     [Teardown]    Run Keywords    Click Back Button In Podcast Player Page
     ...                    AND    Swipe Down To Close Podcast
+    ...                    AND    Click Home Page Button
 
 Fast_Forward_Podcast_To_Specific_Time
     [Tags]    TC-MC-06

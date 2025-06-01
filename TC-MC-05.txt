@@ -1,0 +1,66 @@
+*** Settings ***
+Library    AppiumLibrary
+Library    BuiltIn
+Library    String
+Library    Collections
+
+*** Keywords ***
+Click Fast Forward 30s Button
+    ${fast_btn} =    Set Variable    //android.widget.ImageButton[@content-desc="Fast-forward"]
+    Wait Until Element Is Visible    ${fast_btn}    timeout=10s
+    Click Element    ${fast_btn}
+
+Convert Time String To Seconds
+    [Arguments]    ${time_string}
+    ${parts}=    Split String    ${time_string}    :
+    ${hours}=    Convert To Integer    ${parts[0]}
+    ${minutes}=  Convert To Integer    ${parts[1]}
+    ${seconds}=  Convert To Integer    ${parts[2]}
+    ${total}=    Evaluate    ${hours}*3600 + ${minutes}*60 + ${seconds}
+    RETURN    ${total}
+
+Verify Fast Forward Podcast Is Correct
+    ${time_locator} =    Set Variable    //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]
+    Wait Until Element Is Visible    ${time_locator}
+
+    Click Rewind 10s Button
+
+    ${time1}=    Get Text    ${time_locator}
+    ${total} =    Convert Time String To Seconds    ${time1}
+    Log    Current play time: ${time1}
+
+    Click Fast Forward 30s Button
+    Wait Until Element Is Visible    ${time_locator}
+    ${time2}=    Get Text    ${time_locator}
+    Log    Current play time: ${time2}
+
+    ${t1}=    Convert Time String To Seconds    ${time1}
+    ${t2}=    Convert Time String To Seconds    ${time2}
+    # ${expected}=    Evaluate    ${t1} + 30
+    # Should Be Equal As Integers    ${t2}    ${expected}
+    ${expected}=    Evaluate    ${t1} + 30
+    ${diff}=    Evaluate    abs(${t2} - ${expected})
+    Should Be True    ${diff} <= 5    Fast forward time is not within acceptable range.
+
+Click Rewind 10s Button
+    ${back_btn} =    Set Variable    //android.widget.ImageButton[@content-desc="Rewind"]
+    Wait Until Element Is Visible    ${back_btn}    timeout=10s
+    Click Element    ${back_btn}
+
+Verify Rewind Podcast Is Correct
+    Click Fast Forward 30s Button
+    ${time_locator} =    Set Variable    //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvPosition"]
+    Wait Until Element Is Visible    ${time_locator}
+    ${time1}=    Get Text    ${time_locator}
+    Log    Current play time: ${time1}
+    Click Rewind 10s Button
+    Wait Until Element Is Visible    ${time_locator}
+    ${time2}=    Get Text    ${time_locator}
+    Log    Current play time: ${time2}
+
+    ${t1}=    Convert Time String To Seconds    ${time1}
+    ${t2}=    Convert Time String To Seconds    ${time2}
+    ${expected}=    Evaluate    ${t1} - 10
+    # Should Be Equal As Integers    ${t2}    ${expected}
+    ${diff}=    Evaluate    abs(${t2} - ${expected})
+    Should Be True    ${diff} <= 1    Rewind time is not within acceptable range.
