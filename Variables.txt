@@ -5,3 +5,5 @@ ${PLATFORM_VERSION}    16.0
 ${DEVICE_NAME}    emulator-5554
 ${PACKAGE_NAME}     de.danoeh.antennapod.debug
 ${Activity_NAME}        de.danoeh.antennapod.activity.MainActivity
+@{toPlayList}=  1   2
+@{episodeTitleList}

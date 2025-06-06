@@ -132,3 +132,107 @@ Swipe Down To Close Podcast
     Wait Until Element Is Visible    ${bar}    timeout=10s
     Drag And Drop    ${podcast}    ${bar}
     Wait Until Page Does Not Contain Element    ${podcast}
+
+Delete Podcast From Subscribtion
+    [Arguments]    ${podcast_name}
+    ${podcast_locator} =    Set Variable    //android.widget.ImageView[@content-desc="${podcast_name}"]
+    Wait Until Element Is Visible    ${podcast_locator}    timeout=20s
+    Long Press    ${podcast_locator}
+
+Click Remove Podcast
+    ${remove_podcast_btn} =    Set Variable    //android.widget.TextView[@text="Remove podcast"]
+    Wait Until Element Is Visible    ${remove_podcast_btn}    timeout=20s
+    Click Element    ${remove_podcast_btn}
+
+Click Confirm Button
+    ${confirm_btn} =    Set Variable    //android.widget.Button[@resource-id="android:id/button1"]
+    Wait Until Element Is Visible    ${confirm_btn}    timeout=20s
+    Click Element    ${confirm_btn}
+
+Delete From Subscribtion
+    [Arguments]    ${podcast_name}
+    ${podcast_locator} =    Set Variable    //android.widget.ImageView[@content-desc="${podcast_name}"]
+    Delete Podcast From Subscribtion    ${podcast_name}
+    Click Remove Podcast
+    Click Confirm Button
+    Wait Until Page Does Not Contain Element    ${podcast_locator}
+
+
+
+Go To Home Page
+    ${homeButtonID}=    Set Variable    //android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_home"]
+    Wait Until Element Is Visible    ${homeButtonID}
+    Click Element    ${homeButtonID}
+
+Go To Queue Page
+    ${queueButtonID}=    Set Variable    //android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_queue"]
+    Wait Until Element Is Visible    ${queueButtonID}
+    Click Element    ${queueButtonID}
+
+Go To Subscription Page
+    ${subscriptionButtonID}=    Set Variable    //android.widget.FrameLayout[@resource-id="de.danoeh.antennapod.debug:id/bottom_navigation_subscriptions"]
+    Wait Until Element Is Visible    ${subscriptionButtonID}    timeout=20s
+    Click element    ${subscriptionButtonID}
+
+Subscribe Podcast By Index
+    [Arguments]    ${index}
+    ${podcastGridElement}=    Set Variable    //android.widget.GridView[@resource-id="de.danoeh.antennapod.debug:id/discover_grid"]/android.widget.LinearLayout[${index}]
+    ${suscribeButton}=    Set Variable    //android.widget.Button[@resource-id="de.danoeh.antennapod.debug:id/butSubscribe"]
+    Wait Until Element Is Visible    ${podcastGridElement}    timeout=10s
+    Click Element    ${podcastGridElement}
+    Wait Until Element Is Visible    ${suscribeButton}    timeout=10s
+    Click Element    ${suscribeButton}
+
+Add Podcast To Subscriptions
+    Go To Subscription Page
+    Wait Until Element Is Visible    //android.widget.ImageButton[@content-desc="Add podcast"]
+    Click Element    //android.widget.ImageButton[@content-desc="Add podcast"]
+    Subscribe Podcast By Index    1
+
+Click Button Action In Podcast Information Page
+    ${buttonAction}=    Set Variable    //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/butAction1"]
+    Wait Until Element Is Visible   ${buttonAction}   timeout=5s
+    Click Element    ${buttonAction}
+
+Audio Player Should Be Visible
+    ${audioPlayer}=    Set Variable    //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]
+    Wait Until Element Is Visible    ${audioPlayer}    timeout=10s
+
+Append Title To List
+    [Arguments]    ${title}
+    Append To List    ${episodeTitleList}    ${title}
+    Set Suite Variable    @{episodeTitleList}    @{episodeTitleList}
+
+Play And Pause Podcast
+    [Arguments]    ${episodeIndex}    ${isNeedTitle}=False
+    Wait Until Page Contains Element    xpath=//androidx.recyclerview.widget.RecyclerView[@resource-id="de.danoeh.antennapod.debug:id/recyclerView"]
+    ${episodes}=    Get Webelements    xpath=//androidx.recyclerview.widget.RecyclerView[@resource-id="de.danoeh.antennapod.debug:id/recyclerView"]/android.widget.FrameLayout
+    ${episode}=     Set Variable    ${episodes}[${episodeIndex}]
+    Wait Until Element Is Visible    ${episode}    timeout=5s
+    Click Element    ${episode}
+    Click Button Action In Podcast Information Page
+    Audio Player Should Be Visible
+    Click Pause Button
+    Run Keyword If    ${isNeedTitle}    Get And Append Title From Episode    ${episodeIndex}
+
+Get And Append Title From Episode
+    [Arguments]    ${episodeIndex}
+    ${index}=    Evaluate    ${episodeIndex} + 1
+    ${title}=    Get Text    xpath=(//androidx.recyclerview.widget.RecyclerView[@resource-id="de.danoeh.antennapod.debug:id/recyclerView"]/android.widget.FrameLayout)[${index}]//android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvTitle"]
+    Append Title To List    ${title}
+
+Click Back Button In Podcast Information Page
+    ${backButton}=    Set Variable    //android.widget.ImageButton[@content-desc="Back"]
+    Click Element    ${backButton}
+
+Click Audio Player
+    ${audioPlayer}=    Set Variable    //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/fragmentLayout"]
+    ${player}=    Set Variable    //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/playtime_layout"]
+    Wait Until Element Is Visible    ${audioPlayer}    10s
+    Click Element    ${audioPlayer}
+    Wait Until Page Contains Element    ${player}    10s
+
+Click Back Button In Podcast Page
+    ${backButton}=    Set Variable    //android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/appbar"]//android.view.ViewGroup[@resource-id="de.danoeh.antennapod.debug:id/toolbar"]//android.widget.TextView[@text="Home"]
+    Wait Until Element Is Visible   ${backButton}   10s
+    Click Element    ${backButton}

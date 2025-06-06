@@ -1,0 +1,107 @@
+*** Settings ***
+Library    AppiumLibrary
+Library    XML
+Resource    common.txt
+
+*** Keywords ***
+Click To Skip Podcast
+    ${skipButton}=    Set Variable    id=de.danoeh.antennapod.debug:id/butSkip
+    Wait Until Page Contains Element    ${skipButton}    10s
+    Click Element    ${skipButton}
+
+Play Podcast In Queue With No Next Podcast
+    Click Audio Player
+    Click To Skip Podcast
+
+Home Button Should Not Be Clickable
+    ${homeButton}=    Set Variable    id=de.danoeh.antennapod.debug:id/bottom_navigation_home
+    ${buttonAttribute}=    Get Element Attribute    ${homeButton}    clickable
+    Should Be Equal    ${buttonAttribute}    false
+
+Verify Skip To Next Podcast With Only One Podcast In Queue Will Back To Home Page
+    ${homeText}=    Set Variable    //android.view.ViewGroup[@resource-id="de.danoeh.antennapod.debug:id/toolbar"]//android.widget.TextView[@text="Home"]
+    Wait Until Page Contains Element    ${homeText}    10s
+    Home Button Should Not Be Clickable
+
+Click Options Button
+    ${optionsButton}=    Set Variable    //android.view.ViewGroup[@resource-id="de.danoeh.antennapod.debug:id/toolbar"]//androidx.appcompat.widget.LinearLayoutCompat//android.widget.ImageView[@content-desc="More options"]
+    Wait Until Element Is Visible    ${optionsButton}    timeout=5s
+    Click Element    ${optionsButton}
+
+Click Option In List
+    [Arguments]    ${optionText}
+    ${option}=    Set Variable    //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/title" and @text="${optionText}"]
+    Wait Until Element Is Visible    ${option}    timeout=5s
+    Click Element    ${option}
+
+Click Options Button For Add Podcast To Queue
+    [Arguments]    ${optionText}
+    Click Options Button
+    Click Option In List    ${optionText}
+
+Add Podcast To Queue
+    [Arguments]    ${episodeIndex}    ${isNeedTitle}=False
+    Wait Until Page Contains Element
+    ...    xpath=//androidx.recyclerview.widget.RecyclerView[@resource-id="de.danoeh.antennapod.debug:id/recyclerView"]
+    ...    timeout=10s
+    ${episodes}=    Get Webelements
+    ...    xpath=//androidx.recyclerview.widget.RecyclerView[@resource-id="de.danoeh.antennapod.debug:id/recyclerView"]/android.widget.FrameLayout/android.widget.LinearLayout[@resource-id="de.danoeh.antennapod.debug:id/container"]
+    ${episode}=     Set Variable    ${episodes}[${episodeIndex}]
+    Wait Until Element Is Visible    ${episode}    timeout=5s
+    Click Element    ${episode}
+    Click Options Button For Add Podcast To Queue    Add to queue
+    ${episodeIndex1based}=    Evaluate    ${episodeIndex} + 1
+    ${title}=    Get Text    xpath=//android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvTitle"]
+    Run Keyword If    ${isNeedTitle}    Append Title To List    ${title}
+
+
+Add Podcasts To Queue
+    [Arguments]    @{episodeIndexList}
+    FOR    ${index}    IN    @{episodeIndexList}
+        Add Podcast To Queue    ${index}    isNeedTitle=True
+        Click Back Button In Podcast Information Page
+    END
+
+Play And Pause Podcasts
+    [Arguments]    @{episodeIndexList}
+    FOR    ${index}    IN    @{episodeIndexList}
+        Play And Pause Podcast    ${index}    True
+        Click Back Button In Podcast Information Page
+    END
+
+Click Podcast In Queue
+    [Arguments]    ${index}
+    ${podcastElement}=    Set Variable    //androidx.recyclerview.widget.RecyclerView[@resource-id="de.danoeh.antennapod.debug:id/recyclerView"]/android.widget.FrameLayout[${index}]
+    Wait Until Element Is Visible    ${podcastElement}    timeout=5s
+    Click Element    ${podcastElement}
+
+Play Podcast In Queue With Has Next Podcast
+    Click Podcast In Queue    1
+    Click Button Action In Podcast Information Page
+    Click Audio Player
+    ${playingPodcastTitle}=    Get Text    //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvTitle"]
+    Set Test Variable    ${playingPodcastTitle}
+    Click To Skip Podcast
+
+Verify Skip To Next Podcast With Has Next Podcast Will Is Expected
+    ${progressToLoadButton}=    Set Variable    id=de.danoeh.antennapod.debug:id/progLoading
+    Wait Until Page Does Not Contain Element    ${progressToLoadButton}    10s
+    Log    ${episodeTitleList}[1]
+    ${nextPodcastTitle}=    Set Variable    //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/txtvEpisodeTitle" and @text= "${episodeTitleList}[1]"]
+    Wait Until Page Contains Element    ${nextPodcastTitle}    10s
+    Set Suite Variable    @{episodeTitleList}    @{EMPTY}
+
+Click Back Button And Go To Home Page
+    Click Back Button In Podcast Player Page
+    Go To Home Page
+
+Clear Queue
+    ${more_option_btn} =    Set Variable    //android.widget.ImageView[@content-desc="More options"]
+    ${clear_queue_btn} =    Set Variable    //android.widget.TextView[@resource-id="de.danoeh.antennapod.debug:id/title" and @text='Clear queue']
+    ${confirm_btn_btn} =    Set Variable    //android.widget.Button[@resource-id="android:id/button1"]
+    Wait Until Element Is Visible    ${more_option_btn}    timeout=5s
+    Click Element    ${more_option_btn}
+    Wait Until Element Is Visible    ${clear_queue_btn}    timeout=5s
+    Click Element    ${clear_queue_btn}
+    Wait Until Element Is Visible    ${confirm_btn_btn}    timeout=5s
+    Click Element    ${confirm_btn_btn}

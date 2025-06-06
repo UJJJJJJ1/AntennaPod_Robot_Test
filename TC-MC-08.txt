@@ -1,0 +1,57 @@
+*** Settings ***
+Library    String
+Resource    common.txt
+
+***Keywords***
+Click Playback Button
+    ${playbackButton}=    Set Variable    id=de.danoeh.antennapod.debug:id/butPlaybackSpeed
+    Wait Until Element Is Visible    ${playbackButton}    timeout=10s
+    Click Element    ${playbackButton}
+
+Playback Speed Sheet Should Be Visible
+    ${playbackSheet}=    Set Variable    id=de.danoeh.antennapod.debug:id/design_bottom_sheet
+    Wait Until Element Is Visible    ${playbackSheet}    timeout=10s
+
+Click Presets Speed Button
+    ${presetsSpeedButton}=    Set Variable    xpath=//android.widget.GridView[@resource-id="de.danoeh.antennapod.debug:id/selected_speeds_grid"]//android.widget.Button[@text= "1.50"]
+    Wait Until Element Is Visible    ${presetsSpeedButton}    timeout=10s
+    Click Element    ${presetsSpeedButton}
+
+Set Podcast To Specific Speed
+    Click Audio Player
+    Click Playback Button
+    Playback Speed Sheet Should Be Visible
+    Click Presets Speed Button
+
+Speed Text Below Playback Button Should Be 1.50
+    ${speedTextLocator}=    Set Variable    id=de.danoeh.antennapod.debug:id/txtvPlaybackSpeed
+    Wait Until Page Contains Element    ${speedTextLocator}    timeout=10s
+    ${speedText}=    Get Text    ${speedTextLocator}
+    Should Be Equal As Strings    ${speedText}    1.50
+
+Click Play Button1
+    ${playButton}=    Set Variable    id=de.danoeh.antennapod.debug:id/butPlay
+    Click Element    ${playButton}
+
+Convert Time To Seconds
+    [Arguments]    ${time}
+    ${parts}=    Split String    ${time}    :
+    ${hours}=    Convert To Integer    ${parts[0]}
+    ${minutes}=    Convert To Integer    ${parts[1]}
+    ${seconds}=    Convert To Integer    ${parts[2]}
+    ${total}=    Evaluate    ${hours} * 3600 + ${minutes} * 60 + ${seconds}
+    RETURN    ${total}
+
+Play The Podcast 2 seconds Should Forward Total 3 Seconds
+    ${thisTime}=    Get Text    id=de.danoeh.antennapod.debug:id/txtvPosition
+    ${thisSeconds}=    Convert Time To Seconds    ${thisTime}
+    Click Play Button1
+    Sleep    2s
+    ${nextTime}=    Get Text    id=de.danoeh.antennapod.debug:id/txtvPosition
+    ${nextSeconds}=    Convert Time To Seconds    ${nextTime}
+    ${diff}=    Evaluate    ${nextSeconds} - ${thisSeconds}
+    Should Be True    ${diff} >= 1 and ${diff} <= 6
+
+Verify Speed Is Adjusted
+    Speed Text Below Playback Button Should Be 1.50
+    Play The Podcast 2 seconds Should Forward Total 3 Seconds
