@@ -15,7 +15,7 @@ Play Podcast In Queue With No Next Podcast
 
 Home Button Should Not Be Clickable
     ${homeButton}=    Set Variable    id=de.danoeh.antennapod.debug:id/bottom_navigation_home
-    ${buttonAttribute}=    Get Element Attribute    ${homeButton}    clickable
+    ${buttonAttribute}=    AppiumLibrary.Get Element Attribute    ${homeButton}    clickable
     Should Be Equal    ${buttonAttribute}    false
 
 Verify Skip To Next Podcast With Only One Podcast In Queue Will Back To Home Page

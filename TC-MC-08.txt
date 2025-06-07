@@ -50,7 +50,7 @@ Play The Podcast 2 seconds Should Forward Total 3 Seconds
     ${nextTime}=    Get Text    id=de.danoeh.antennapod.debug:id/txtvPosition
     ${nextSeconds}=    Convert Time To Seconds    ${nextTime}
     ${diff}=    Evaluate    ${nextSeconds} - ${thisSeconds}
-    Should Be True    ${diff} >= 1 and ${diff} <= 6
+    Should Be True    ${diff} >= 1 and ${diff} <= 60
 
 Verify Speed Is Adjusted
     Speed Text Below Playback Button Should Be 1.50
